@@ -2,7 +2,7 @@ package moot.mowitnow;
 
 /**
  * Created with IntelliJ IDEA.
- * User: moot
+ * User: <a href="mailto:mathieu.chataigner@gmail.com">Mathieu Chataigner</a>
  * Date: 12/7/12
  * Time: 8:40 PM
  * To change this template use File | Settings | File Templates.

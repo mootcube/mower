@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 /**
  * Created with IntelliJ IDEA.
- * User: moot
+ * User: <a href="mailto:mathieu.chataigner@gmail.com">Mathieu Chataigner</a>
  * Date: 12/9/12
  * Time: 11:09 PM
  * To change this template use File | Settings | File Templates.
