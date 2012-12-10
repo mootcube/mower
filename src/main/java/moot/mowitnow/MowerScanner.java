@@ -3,6 +3,7 @@ package moot.mowitnow;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -33,14 +34,20 @@ public class MowerScanner {
     }
 
     public List<Mower> processInput()throws IOException{
-        int x=scanner.nextInt();
-        int y=scanner.nextInt();
+        int x,y;
+        try{
+            x=scanner.nextInt();
+            y=scanner.nextInt();
+        }catch (NoSuchElementException e){
+            System.err.println("Error in upper right corner.");
+            return null;
+        }
         plateau = new Plateau(x+1,y+1);
         mowers = new ArrayList<Mower>();
         do{
             try{
-                Mower m=new Mower(plateau.new Position(scanner.nextInt(),scanner.nextInt()),Orientation.valueOf(scanner.next()));
-                String actions=scanner.next();
+                Mower m=new Mower(plateau.new Position(scanner.nextInt(),scanner.nextInt()),Orientation.valueOf(scanner.next().toUpperCase()));
+                String actions=scanner.next().toUpperCase();
                 for(char c:actions.toCharArray()){
                     m.carryAction(Action.valueOf(String.valueOf(c)));
                 }
