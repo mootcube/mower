@@ -1,15 +1,24 @@
-package moot.mowitnow;
+package mathieu.mowitnow;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
  * User: <a href="mailto:mathieu.chataigner@gmail.com">Mathieu Chataigner</a>
- * Date: 12/9/12
- * Time: 10:25 PM
- * To change this template use File | Settings | File Templates.
  */
-public class Plateau{
+public class Lawn {
+    private static Logger logger= LoggerFactory.getLogger(Lawn.class);
+    private ArrayList<Mower> mowers=new ArrayList<Mower>();
     private final int length,height;
-    public Plateau(int length,int height){
+    public Lawn(int length, int height)throws IllegalArgumentException{
+        if(length<=0 || height<=0){
+            logger.error("Invalid size ({},{}) for a lawn.",length,height);
+            throw new IllegalArgumentException("Invalid size ("+length+","+height+") for a lawn.");
+        }
+        logger.debug("initialize a new Lawn: length "+length+" height "+height);
         this.height = height;
         this.length = length;
     }
@@ -22,11 +31,34 @@ public class Plateau{
         return length;
     }
 
+
+
+    public void putMower(Mower mower){
+        mowers.add(mower);
+    }
+
+    public List<Mower> getMowers(){
+        return mowers;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder builder=new StringBuilder();
+        for(Mower m:mowers){
+            builder.append(m.toString());
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
     public final class Position {
         private final int x,y;
 
         public Position(int x, int y) throws IndexOutOfBoundsException{
-            if(x<0||x>=Plateau.this.getLength()||y<0||y>=Plateau.this.getHeight())throw new IndexOutOfBoundsException("("+x+","+y+") out of {(0,0),("+Plateau.this.getLength()+","+Plateau.this.getHeight()+")");
+            if(x<0||x> Lawn.this.getLength()||y<0||y> Lawn.this.getHeight()){
+                logger.error("invalid Position ("+x+","+y+") is outside the Lawn [(0:"+Lawn.this.getLength()+");(0:"+Lawn.this.getHeight()+")]");
+                throw new IndexOutOfBoundsException("("+x+","+y+") out of {(0,0),("+Lawn.this.getLength()+","+Lawn.this.getHeight()+")");
+            }
             this.x=x;
             this.y=y;
         }
@@ -60,14 +92,14 @@ public class Plateau{
         public Position getNearPosition(Orientation orientation){
             switch (orientation){
                 case N:
-                    if(y==Plateau.this.getHeight()-1){
+                    if(y==Lawn.this.getHeight()){
                         return this;
                     }
                     else{
                         return new Position(x,y+1);
                     }
                 case E:
-                    if(x==Plateau.this.getLength()-1){
+                    if(x==Lawn.this.getLength()){
                         return this;
                     }
                     else{

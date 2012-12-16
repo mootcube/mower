@@ -1,23 +1,23 @@
-package moot.mowitnow;
+package mathieu.mowitnow;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created with IntelliJ IDEA.
  * User: <a href="mailto:mathieu.chataigner@gmail.com">Mathieu Chataigner</a>
- * Date: 12/7/12
- * Time: 8:40 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Mower implements Vehicle, Movable{
-    private Plateau.Position position;
+    private Lawn.Position position;
     private Orientation orientation;
+    private static Logger logger = LoggerFactory.getLogger(Mower.class);
 
-
-    public Mower(Plateau.Position position,Orientation orientation){
+    public Mower(Lawn.Position position,Orientation orientation){
+        logger.debug("initialize new Mower at Position ("+position.getX()+","+position.getY()+") and orientated "+orientation);
         this.position =position;
         this.orientation =orientation;
     }
 
-    public Plateau.Position getPosition() {
+    public Lawn.Position getPosition() {
         return position;
     }
 

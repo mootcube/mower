@@ -1,5 +1,6 @@
 .idea
 out
 target
-moot.mower.iml
+*.iml
 output.txt
+out.txt
